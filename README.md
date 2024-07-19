@@ -58,7 +58,4 @@ Feel free to submit issues, fork the repository, and send pull requests. Contrib
 - [ ]  Explore direct Gmail login using just the Gmail address and password
 - [ ]  Improve GUI for better user experience (feedback and suggestions are welcome!)
 - [ ]  Expand support to include other mail servers beyond Gmail
-- [ ]  Add examples and use cases
 - [ ]  Add detailed documentation and tutorials
-- [ ]  Add issue templates
-- [ ]  Add pull request templates
