@@ -28,6 +28,7 @@ const (
 	appName    = "gmail_box_api"
 	appVersion = "v1.0"
 	credsFile  = "credentials.json"
+	imapGmailServer = "imap.gmail.com:993"
 )
 
 type Credentials struct {
@@ -181,12 +182,11 @@ func loadCredentials() ([]Credentials, error) {
 // processEmailsHandler connects to the IMAP server, logs in, and processes emails from the specified date.
 // It handles both received and sent emails, updating the progress bar as it processes.
 func processEmailsHandler(email, password, specificDate string, progressBar *widget.ProgressBar, progressLabel *widget.Label, myWindow fyne.Window) error {
-	imapserver := "imap.gmail.com:993"
 	log.Println("Processing emails for", email)
 
 	log.Println("Connecting to server...")
 
-	c, err := imapclient.DialTLS(imapserver, nil)
+	c, err := imapclient.DialTLS(imapGmailServer, nil)
 	if err != nil {
 		return err
 	}
