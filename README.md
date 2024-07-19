@@ -1,6 +1,18 @@
 # go-imap-gmail-client
 
+
+## Description
+
 This project is a Go-based client for processing Gmail messages using the IMAP protocol. 
+
+## Main Stack and Libraries
+
+- **Programming Language**: Go (Golang)
+- **UI Framework**: Fyne
+- **Email Client**: github.com/emersion/go-imap/v2, github.com/emersion/go-message/mail
+- **JSON Handling**: encoding/json
+- **Logging**: log
+- **File Handling**: os, bufio
 
 ## Features
 
