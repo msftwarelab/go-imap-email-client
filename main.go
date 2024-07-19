@@ -27,7 +27,7 @@ import (
 const (
 	appName    = "gmail_box_api"
 	appVersion = "v1.0"
-	credsFile  = "credentials.json"
+	credsFile  = "credentials/credentials.json"
 	imapGmailServer = "imap.gmail.com:993"
 )
 
