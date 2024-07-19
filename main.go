@@ -246,9 +246,6 @@ func processEmails(c *imapclient.Client, mailboxName string, specificDate string
 	progressStep := 1.0 / float64(messageCount)
 	currentProgress := 0.0
 
-	filterKeywords := []string{"voice.google.com", "noreply", "donotreply", "no-reply", "mailtrack.io", "dice.com", "medium.com", "jobot.com", "lensa.com", "experteer.com", 
-														"calendly.com",	"linkedin.com", "indeed.com", "glassdoor.com"}
-
 	for {
 		msg := messages.Next()
 		if msg == nil {
@@ -278,17 +275,6 @@ func processEmails(c *imapclient.Client, mailboxName string, specificDate string
 
 				validMessage = true
 
-				if len(item.Envelope.From) > 0 {
-					from = item.Envelope.From[0].Mailbox + "@" + item.Envelope.From[0].Host
-					fromName = item.Envelope.From[0].Name
-
-					for _, keyword := range filterKeywords {
-						if strings.Contains(from, keyword) {
-							validMessage = false
-							break
-						}
-					}
-				}
 				if len(item.Envelope.To) > 0 {
 					to = item.Envelope.To[0].Mailbox + "@" + item.Envelope.To[0].Host
 					toName = item.Envelope.To[0].Name
