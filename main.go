@@ -25,9 +25,9 @@ import (
 )
 
 const (
-	appName    = "gmail_box_api"
-	appVersion = "v1.0"
-	credsFile  = "credentials/credentials.json"
+	appName         = "gmail_box_api"
+	appVersion      = "v1.0"
+	credsFile       = "./credentials/credentials.json"
 	imapGmailServer = "imap.gmail.com:993"
 )
 
@@ -48,7 +48,7 @@ func main() {
 	passwordEntry.SetPlaceHolder("Password")
 
 	dateEntry := widget.NewEntry()
-	dateEntry.SetPlaceHolder("Date (YYYY-MM-DD)")	
+	dateEntry.SetPlaceHolder("Date (YYYY-MM-DD)")
 
 	progressBar := widget.NewProgressBar()
 	progressLabel := widget.NewLabel("")
@@ -93,18 +93,18 @@ func main() {
 				dialog.ShowInformation("Error", "No credentials found", myWindow)
 				return
 			}
-		
+
 			specificDate := dateEntry.Text
 			if specificDate == "" {
 				dialog.ShowInformation("Error", "Please enter a date", myWindow)
 				return
 			}
-		
+
 			go func() {
 				progressBar.SetValue(0)
 				totalCredentials := len(credsList)
 				progressStep := 1.0 / float64(totalCredentials)
-		
+
 				for i, creds := range credsList {
 					progressLabel.SetText(fmt.Sprintf("Fetching received emails for %s...", creds.Email))
 					err := processEmailsHandler(creds.Email, creds.Password, specificDate, progressBar, progressLabel, myWindow)
@@ -229,7 +229,9 @@ func processEmails(c *imapclient.Client, mailboxName string, specificDate string
 	}
 	log.Printf("Mailbox %s selected.", mailboxName)
 
-	seqSet := imap.SeqSetRange(mbox.NumMessages - 500, mbox.NumMessages)
+	log.Println("NumMessages are ", mbox.NumMessages)
+
+	seqSet := imap.SeqSetRange(1, mbox.NumMessages)
 	fetchOptions := &imap.FetchOptions{
 		UID:         true,
 		Flags:       true,
@@ -241,9 +243,9 @@ func processEmails(c *imapclient.Client, mailboxName string, specificDate string
 
 	log.Println("Messages fetched, starting to process each message...")
 
-	messageCount := 501
+	// messageCount := 501
 
-	progressStep := 1.0 / float64(messageCount)
+	progressStep := 1.0 / float64(mbox.NumMessages)
 	currentProgress := 0.0
 
 	for {
